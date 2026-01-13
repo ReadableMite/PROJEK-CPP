@@ -3,6 +3,47 @@
 #include<cstdlib>
 #include<ctime>
 
+// Proses Logika
+void prosesLogika(std::string input, std::string keyword[3][3], std::string respon[3][15], int mood[3][15], int trait_id, int &affinity, int &mood_waifu){
+    bool ketemu=false;
+    float multiplier=1.0;
+
+    if(trait_id==0){
+        multiplier=0.5;
+    }else if(trait_id==1){
+        multiplier=1.0;
+    }else if(trait_id==2){  
+        multiplier=1.5;
+    }
+
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            if(input==keyword[i][j]){
+                int acak=std::rand() % 5;
+                int idx_kolom=(j*5)+acak;
+                
+                std::cout<<"Jane Doe: "<<respon[i][idx_kolom]<<std::endl;
+                ketemu=true;
+                mood_waifu+=(int)(mood[i][idx_kolom] * multiplier);
+                affinity+=1;
+            }
+        }
+    }
+    if(affinity>=10 && input!="Bye" && ketemu){
+        std::cout<<"(Jane Doe terlihat semakin menyukai kamu...)\n";
+    }
+    if(input=="Gift" || input=="gift"){
+        mood_waifu=100;
+        std::cout<<"Eh....Makasih >///<\n";
+        ketemu=true;
+    }
+
+    if(ketemu==false && (input!="Gift" && input!="gift") && (input!="Bye" && input!="bye")){
+        std::cout<<"Jane Doe: Hah? Ngomong apa sih?\n// Perintah tidak ditemukan.\n";
+        mood_waifu-=1;
+    }
+}
+
 // Daftar Menu
 void tampilanMenu(std::string keyword[3][3]){
     std::cout<<"\n--- Daftar Menu ChatBot ---\n";
@@ -73,7 +114,7 @@ int main(){
     {3, 2, 1, 0, 4, 7, 6, 8, 5, 9, 11, 13, 14, 10, 12},
     {-1, -2, -3, -4, -0, -8, -7, -5, -9, -6, -12, -13, -11, -14, -10},
     {-2, -3, -4, -1, 0, -5, -7, -8, -6, -9, -14, -11, -12, -13, -10}
-    }, mood_waifu=50;
+    }, mood_waifu=50, trait_id=0, affinity=0;
 
     std::cout<<"Selamat Datang di Program ChatBot Waifu: 'Jane Doe 3'\nSilahkan Ikuti Program Berikut.\n";
 
@@ -87,35 +128,10 @@ int main(){
         if(menuBye(input, mood_waifu)){
             break;
         }
+        prosesLogika(input, keyword, respon, mood, trait_id, affinity, mood_waifu);
+        std::cout<<"[Sistem: Kedekatan saat ini = "<<affinity<<"]\n";
         if(mood_waifu<=0){
             std::cout<<"Aku ngga mau ngomong sama kamu. Huft!!\n";
-            break;
-        }
-
-        
-        bool ketemu=false;
-        if(mood_waifu>0){
-            for(int i=0;i<3;i++){
-                for(int j=0;j<3;j++){
-                    if(input==keyword[i][j]){
-                        int acak=std::rand() % 5;
-                        int idx_kolom=(j*5)+acak;
-                        
-                        std::cout<<"Jane Doe: "<<respon[i][idx_kolom]<<std::endl;
-                        ketemu=true;
-                        mood_waifu+=mood[i][idx_kolom];
-                    }
-                }
-            }
-        }
-        if(input=="Gift" || input=="gift"){
-        mood_waifu=100;
-        std::cout<<"Eh....Makasih >///<\n";
-        ketemu=true;
-        }
-        if(ketemu==false && (input!="Gift" && input!="gift") && (input!="Bye" && input!="bye")){
-            std::cout<<"Jane Doe: Hah? Ngomong apa sih?\n// Perintah tidak ditemukan.\n";
-            mood_waifu-=1;
             break;
         }
     }
