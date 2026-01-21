@@ -10,7 +10,7 @@ int hitung(int nilai1, char op, int nilai2, bool &isError){
                 std::cout<<"Error: Pembagian nol!\n";
                 isError=true;
                 return nilai1;
-            }else if(nilai2!=0){
+            }else{
                 return nilai1/=nilai2;
             }
         case '%': return nilai1%=nilai2;
