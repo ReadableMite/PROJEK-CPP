@@ -23,6 +23,7 @@ int main(){
     std::cout << "Power Level (level dikali 10): " << hasil << std::endl;
 
     // ================================================
+    std::cout << "\n\n";
 
     std::cout << "Masukkan jumlah koin emas: ";
     std::cin >> j;
