@@ -11,31 +11,46 @@ int jumlah(int gold_amount, int silver_amount){
 
 int main(){
     int input_level, hasil, gold_amount, silver_amount, hasil2;
+    char pilihan = 'n';
 
-    std::cout << "Masukkan level: ";
-    std::cin >> input_level;
+    std::cout << "Apakah kamu ingin diperiksa? (y/n) ";
+    std::cin >> pilihan;
 
-    hasil = multiplier(input_level);
-    std::cout << "Power Level (level dikali 10): " << hasil << std::endl;
+    while (pilihan =='y'){
+        std::cout << "Masukkan level: ";
+        std::cin >> input_level;
 
-    // ================================================
-    std::cout << "\n";
+        hasil = multiplier(input_level);
+        std::cout << "Power Level (level dikali 10): " << hasil << std::endl;
 
-    std::cout << "Masukkan jumlah koin emas: ";
-    std::cin >> gold_amount;
-    std::cout << "Masukkan jumlah koin perak: ";
-    std::cin >> silver_amount;
+        // ================================================
 
-    hasil2 = jumlah(gold_amount, silver_amount);
-    std::cout << "Total kekayaan koin: " << hasil2 << std::endl;
+        std::cout << "\n";
+
+        std::cout << "Masukkan jumlah koin emas: ";
+        std::cin >> gold_amount;
+        std::cout << "Masukkan jumlah koin perak: ";
+        std::cin >> silver_amount;
+
+        hasil2 = jumlah(gold_amount, silver_amount);
+        std::cout << "Total kekayaan koin: " << hasil2 << std::endl;
+
+        // ================================================
     
-    if (hasil > 80 && hasil2 > 1000){
-        std::cout << "STATUS: Selamat datang, Pahlawan Legendaris!\n";
-    } else if (hasil > 50 && hasil2 > 1000){
-        std::cout << "STATUS: Boleh masuk, tapi hati-hati ya.\n";
-    } else {
-        std::cout << "STATUS: Maaf, kamu tidak dipersilahkan untuk masuk ke kota. Silahkan pergi!\n";
-    }
+        if (hasil > 80 && hasil2 > 1000){
+            std::cout << "STATUS: Selamat datang, Pahlawan Legendaris!\n";
+        } else if (hasil > 50 && hasil2 > 1000){
+            std::cout << "STATUS: Boleh masuk, tapi hati-hati ya.\n";
+        } else {
+            std::cout << "STATUS: Maaf, kamu tidak dipersilahkan untuk masuk ke kota. Silahkan pergi!\n";
+        }
 
+        std::cout << "\n";
+        
+        // ================================================
+
+        std::cout << "Apakah kamu ingin diperiksa? (y/n) ";
+        std::cin >> pilihan;
+    }
     return 0;
 }
